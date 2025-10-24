@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq6dpy3wi7wy4"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_xasec"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxn4k"]
+radius = 84.91442
+height = 169.82884
+
+[node name="Weapon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.41322386, 60.35537)
+rotation = 1.4782939
+scale = Vector2(0.4545978, 0.51537853)
+skew = -1.3875368
+texture = ExtResource("1_xasec")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-0.41322386, 60.35537)
+rotation = 1.4782939
+scale = Vector2(0.4545978, 0.51537853)
+skew = -1.3875368
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.8914089, -9.647925)
+shape = SubResource("CapsuleShape2D_uxn4k")
