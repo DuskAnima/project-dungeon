@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc6kj6noyxakd"]
+
+[ext_resource type="PackedScene" uid="uid://d0yro7c43kteh" path="res://scenes/wall.tscn" id="1_okeva"]
+[ext_resource type="PackedScene" uid="uid://b2n1gge5pb7nl" path="res://scenes/floor.tscn" id="2_o3fi6"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_t43m4"]
+scenes/1/scene = ExtResource("1_okeva")
+scenes/2/scene = ExtResource("2_o3fi6")
+
+[sub_resource type="TileSet" id="TileSet_iakng"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetScenesCollectionSource_t43m4")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_iakng")
+use_kinematic_bodies = true
