@@ -16,10 +16,11 @@ func _process(_delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 
 func _input(_event: InputEvent) -> void:
-	#_movement()
-	is_moving = false
+	var direction : Vector2i = _get_direction()
+	GridManager.move_entity(direction)
 
-func get_direction() -> Vector2i:
+## Get direccition envía la dirección del Input
+func _get_direction() -> Vector2i: 
 	if Input.is_action_just_pressed("down"):
 		return Vector2i.DOWN
 	if Input.is_action_just_pressed("up"):
@@ -38,13 +39,3 @@ func _movement() -> void:
 		tween = create_tween()
 		tween.tween_property(self, "position", position + Vector2.UP * 128, 0.35) # It's alive!!
 		is_moving = true
-
-	if Input.is_action_just_pressed("down"):
-		is_moving = true
-		position += Vector2.DOWN * 50
-	if Input.is_action_just_pressed("left"):
-		is_moving = true
-		position += Vector2.LEFT * 50
-	if Input.is_action_just_pressed("right"):
-		is_moving = true
-		position += Vector2.RIGHT * 50
