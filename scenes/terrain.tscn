@@ -1,16 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc6kj6noyxakd"]
+[gd_scene load_steps=7 format=3 uid="uid://dc6kj6noyxakd"]
 
-[ext_resource type="PackedScene" uid="uid://d0yro7c43kteh" path="res://scenes/wall.tscn" id="1_okeva"]
-[ext_resource type="PackedScene" uid="uid://b2n1gge5pb7nl" path="res://scenes/floor.tscn" id="2_o3fi6"]
+[ext_resource type="Texture2D" uid="uid://dccecifrx1q26" path="res://sprites/wall.png" id="1_oqplg"]
+[ext_resource type="Texture2D" uid="uid://dxgc4mh2lxy46" path="res://sprites/floor.png" id="2_vjhlg"]
+[ext_resource type="Script" uid="uid://b3ujijs2emsun" path="res://scripts/terrain.gd" id="3_vjhlg"]
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_t43m4"]
-scenes/1/scene = ExtResource("1_okeva")
-scenes/2/scene = ExtResource("2_o3fi6")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0ket"]
+texture = ExtResource("1_oqplg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/custom_data_1 = true
+0:1/0 = 0
+0:1/0/custom_data_1 = true
+1:1/0 = 0
+1:1/0/custom_data_1 = true
 
-[sub_resource type="TileSet" id="TileSet_iakng"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tw12r"]
+texture = ExtResource("2_vjhlg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xqm8g"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetScenesCollectionSource_t43m4")
+custom_data_layer_0/name = "is_used"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "is_solid"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_a0ket")
+sources/2 = SubResource("TileSetAtlasSource_tw12r")
 
-[node name="TileMapLayer" type="TileMapLayer"]
-tile_set = SubResource("TileSet_iakng")
+[node name="Terrain" type="TileMapLayer"]
+tile_set = SubResource("TileSet_xqm8g")
 use_kinematic_bodies = true
+script = ExtResource("3_vjhlg")

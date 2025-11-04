@@ -19,7 +19,7 @@ func _input(_event: InputEvent) -> void:
 	var direction : Vector2i = _get_direction()
 	GridManager.move_entity(direction)
 
-## Get direccition envía la dirección del Input
+## Función anónima que retorna un Vector2i que determina la dirección del input de movimiento.
 func _get_direction() -> Vector2i: 
 	if Input.is_action_just_pressed("down"):
 		return Vector2i.DOWN
