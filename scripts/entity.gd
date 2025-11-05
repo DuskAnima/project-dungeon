@@ -1,41 +1,43 @@
 extends CharacterBody2D
 class_name Entity
 
-const SPEED : float = 300.0
-var is_moving : bool = false
 var tween : Tween
-
-func _ready() -> void:
-	GridManager.add_entity(self)
-	print("Entity")
-	move_and_slide()
-
-func _process(_delta: float) -> void:
-	pass
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+var can_move : bool = true
 
 func _input(_event: InputEvent) -> void:
-	var direction : Vector2i = _get_direction()
-	GridManager.move_entity(direction)
+	movement_manager()
 
-## Función anónima que retorna un Vector2i que determina la dirección del input de movimiento.
+	
+## Función que maneja toda la lógica de movimiento
+func movement_manager() -> void:
+	var direction : Vector2i = _get_direction() # Se obtiene la dirección deseada
+	if direction != Vector2i.ZERO and Input.is_action_just_pressed("ui_accept"):
+		_movement_animation(GridManager.grid_movement(position, jump()))
+	if direction != Vector2i.ZERO and can_move == true:
+		can_move = false
+		# GridManager procesa la posición actual y la dirección deseada para calcular la nueva posición
+		var new_position : Vector2 = GridManager.grid_movement(position, direction) 
+		_movement_animation(new_position) # la nueva posición será llevada a cabo por el tween.
+		await tween.finished # Cuando el tween haya terminado mandará una señal para continuar con la ejecusión
+		can_move = true
+
+		
+
+## Función privada que retorna un Vector2i que determina la dirección del input de movimiento deseado.
 func _get_direction() -> Vector2i: 
-	if Input.is_action_just_pressed("down"):
-		return Vector2i.DOWN
-	if Input.is_action_just_pressed("up"):
-		return Vector2i.UP
-	if Input.is_action_just_pressed("left"):
-		return Vector2i.LEFT
-	if Input.is_action_just_pressed("right"):
-		return Vector2i.RIGHT
-	else:
+	if Input.is_action_pressed("down"): return Vector2i.DOWN
+	if Input.is_action_pressed("up"): return Vector2i.UP
+	if Input.is_action_pressed("left"): return Vector2i.LEFT
+	if Input.is_action_pressed("right"): return Vector2i.RIGHT
+	else: return Vector2i.ZERO
+
+func jump() -> Vector2i:
+	if Input.is_action_just_pressed("ui_accept"):
+		return Vector2i.UP * 2
+	else: 
 		return Vector2i.ZERO
 
-func _movement() -> void:
-	if is_moving == true:
-		return print("I can't move!")
-	if Input.is_action_just_pressed("up"):
-		tween = create_tween()
-		tween.tween_property(self, "position", position + Vector2.UP * 128, 0.35) # It's alive!!
-		is_moving = true
+## Función que controla el tween del desplazamiento.
+func _movement_animation(new_position : Vector2) -> void:
+	tween = create_tween()
+	tween.tween_property(self, "position", new_position, 0.20) # It's alive!!
