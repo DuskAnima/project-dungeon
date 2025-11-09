@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 #func _input(_event: InputEvent) -> void:
 #	movement_manager()
 
-## Función que maneja toda la lógica de movimiento
+## Función que maneja toda la lógica de movimientocomo hacer un git pull que sobreescriba cambios locales?
 func movement_manager() -> void:
 	var direction : Vector2i = _get_direction() # Se obtiene la dirección deseada
 	if direction != Vector2i.ZERO and can_move == true:
