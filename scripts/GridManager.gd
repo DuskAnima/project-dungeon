@@ -22,6 +22,8 @@ func grid_movement(e_position : Vector2, e_direction : Vector2i) -> Vector2: # S
 	# Entonces se retorna el TileMap convertido a local position
 	return terrain.map_to_local(new_position)
 
+
+
 ## Todo camino no transitable debe retornar false, en caso contrario será trasitable.
 func _can_move(new_position : Vector2i) -> bool: # Recibe la posición del tile al cual se desea acceder
 	var terrain_data : TileData = terrain.get_cell_tile_data(new_position) # Obtiene la información del tile

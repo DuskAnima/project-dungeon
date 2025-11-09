@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b3ujijs2emsun" path="res://scripts/terrain.gd" id="3_vjhlg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a0ket"]
+resource_name = "wall1"
 texture = ExtResource("1_oqplg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -18,13 +19,17 @@ texture_region_size = Vector2i(32, 32)
 1:1/0/custom_data_1 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqm8g"]
+resource_name = "icefloor"
 texture = ExtResource("2_a0ket")
 texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 3
 0:0/0 = 0
 1:0/0 = 0
+2:0/next_alternative_id = 3
 2:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tw12r"]
+resource_name = "floor1"
 texture = ExtResource("2_vjhlg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
