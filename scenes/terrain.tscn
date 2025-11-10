@@ -10,13 +10,13 @@ resource_name = "wall1"
 texture = ExtResource("1_oqplg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/custom_data_1 = true
+0:0/0/custom_data_0 = true
 1:0/0 = 0
-1:0/0/custom_data_1 = true
+1:0/0/custom_data_0 = true
 0:1/0 = 0
-0:1/0/custom_data_1 = true
+0:1/0/custom_data_0 = true
 1:1/0 = 0
-1:1/0/custom_data_1 = true
+1:1/0/custom_data_0 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqm8g"]
 resource_name = "icefloor"
@@ -25,8 +25,10 @@ texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 3
 0:0/0 = 0
 1:0/0 = 0
+1:0/0/custom_data_1 = true
 2:0/next_alternative_id = 3
 2:0/0 = 0
+2:0/0/custom_data_1 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tw12r"]
 resource_name = "floor1"
@@ -36,9 +38,9 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_xqm8g"]
 tile_size = Vector2i(32, 32)
-custom_data_layer_0/name = "is_breakable"
+custom_data_layer_0/name = "is_solid"
 custom_data_layer_0/type = 1
-custom_data_layer_1/name = "is_solid"
+custom_data_layer_1/name = "is_breakable"
 custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_a0ket")
 sources/2 = SubResource("TileSetAtlasSource_tw12r")

@@ -20,8 +20,8 @@ func movement_manager() -> void:
 	if direction != Vector2i.ZERO and can_move == true:
 		can_move = false
 		# GridManager procesa la posición actual y la dirección deseada para calcular la nueva posición
-		var new_position : Vector2 = GridManager.grid_movement(position, direction) 
-		_movement_animation(new_position) # la nueva posición será llevada a cabo por el tween.
+		var new_position : Vector2 = GridManager.get_new_tile_position(position, direction) 
+		_set_new_tile_position_tween(new_position) # la nueva posición será llevada a cabo por el tween.
 		await tween.finished # Cuando el tween haya terminado manddirectionará una señal para continuar con la ejecusión
 		can_move = true
 
@@ -36,7 +36,7 @@ func _get_direction() -> Vector2i:
 
 
 ## Función que controla el tween del desplazamiento.
-func _movement_animation(new_position : Vector2) -> void:
+func _set_new_tile_position_tween(new_position : Vector2) -> void:
 	tween = create_tween()
 	tween.tween_property(self, "position", new_position, 0.20) # It's alive!!
 
