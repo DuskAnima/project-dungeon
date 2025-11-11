@@ -25,12 +25,8 @@ func get_new_tile_position(e_position : Vector2, e_direction : Vector2i) -> Vect
 	# Entonces se retorna el TileMap convertido a local position
 	return terrain.map_to_local(new_position)
 
-func get_current_tile_data() -> TileData:
-	return terrain.get_cell_tile_data(current_entity_position)
-	
-func get_current_tile_id() -> int:
-	return terrain.get_cell_source_id(current_entity_position)
-
+func get_entity_position() -> Vector2i:
+	return current_entity_position
 
 ## Todo camino no transitable debe retornar false, en caso contrario será trasitable.
 func _can_move(new_position : Vector2i) -> bool: # Recibe la posición del tile al cual se desea acceder
