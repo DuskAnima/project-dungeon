@@ -3,9 +3,10 @@ extends TileMapLayer
 enum Data { IS_SOLID, IS_BREAKABLE }
 enum Floor { FLOOR, ICE_FLOOR, WALL }
 
-var entity_position : Vector2i # Posición actual de entity
-
+var current_entity_position : Vector2i # Posición actual de entity
+var last_entity_position : Vector2i # Posicion anterior de entity
 var tile_data : TileData # Tile Custom Data
+
 var tile_id : int # Tileset ID
 
 var data : TileSet = self.tile_set
@@ -25,13 +26,25 @@ func _ready() -> void:
 	GridManager.set_terrain(self) # Entrega terreno para crear el grid
 	# Conecta el bus a la función de notificación de movimiento finalizado
 	EntityTerrainBus.connect_bus_to_signal_clean(_on_entity_movement_finished)
+	EntityTerrainBus.connect_bus_to_signal_clean(_on_entity_movement_started)
 
-# Recibe una notificación de entity.gd a través del BUS sobre la consolidación del movimiento del entity.
+## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad ha finalizado
 ## Con esto se evitan checks duplicados o innecesarios. 
+## Notifiación creada por EntityTerrainBus
 func _on_entity_movement_finished() -> void:
 	_get_entity_tile_data()
 
-func _get_entity_tile_data() -> TileData:
+## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad va a comenzar
+## Con esto se evitan checks duplicados o innecesarios. 
+## Notifiación creada por EntityTerrainBus
+func _on_entity_movement_started() -> void:
+	pass
+
+## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
+## Además actualiza tanto la posición actual como la posición anterior de entity.
+func _get_entity_tile_data() -> void:
+	# Almacena la posición anterior del personaje
+	last_entity_position = current_entity_position
 	# Luego de reposicionarse, se actualiza la información del tile
-	entity_position = GridManager.get_entity_position() 
-	return self.get_cell_tile_data(entity_position) # Retorna la información del tile
+	current_entity_position = GridManager.get_entity_position() 
+	tile_data = get_cell_tile_data(current_entity_position) # Retorna la información del tile
