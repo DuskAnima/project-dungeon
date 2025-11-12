@@ -11,6 +11,8 @@ signal movement_finished()
 
 var tween : Tween
 var can_move : bool = true
+@export var speed : float = 0.20
+
 
 func _ready() -> void:
 	# Conecta al bus que comunica a la entity.gd con terrain.gd
@@ -48,7 +50,7 @@ func _get_direction() -> Vector2i:
 ## Función que controla el tween del desplazamiento.
 func _set_new_tile_position_tween(new_position : Vector2) -> void:
 	tween = create_tween()
-	tween.tween_property(self, "position", new_position, 0.20) # It's alive!!
+	tween.tween_property(self, "position", new_position, speed) # It's alive!!
 
 """
 func jump() -> Vector2i:

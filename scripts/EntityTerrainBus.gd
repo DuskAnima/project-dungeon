@@ -2,7 +2,7 @@ extends Node
 
 signal clean_signal()
 
-## Conecta EntityTerrainBus a un callable declarado, creando comunicación entre terrain.gd y entity.gd
+## Conecta la señal de EntityTerrainBus a un callable declarado, creando comunicación entre terrain.gd y entity.gd
 ## Esta función solo se utiliza para enviar y recibir señales sin datos
 ## Para utilizar esta función se debe declarar EntityTerrainBus.get_clean_bus_connection()
 ## y luego pasarle como argumento el callable que deberá detonar la señal
