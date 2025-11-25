@@ -18,8 +18,8 @@ var ice_floor : TileData = tile_atlas.get_tile_data(Vector2i(2,0), 0)
 func _ready() -> void:
 	GridManager.set_terrain(self) # Entrega terreno para crear el grid
 	# Conecta el bus a la función de notificación de movimiento 
-	EntityTerrainBus.connect_bus_to_signal_clean(_on_entity_movement_finished)
-	EntityTerrainBus.connect_bus_to_signal_clean(_on_entity_movement_started)
+	EntityTerrainBus.connect_bus_to_signal(_on_movement_started)
+	EntityTerrainBus.connect_bus_to_signal(_on_movement_finished)
 
 # Estoy recibiendo automáticamente la data de cada tile, independiente de cual sea
 func _tile_handler() -> void:
@@ -34,8 +34,8 @@ func _tile_handler() -> void:
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad ha finalizado
 ## Con esto se evitan checks duplicados o innecesarios. 
 ## Notifiación creada por EntityTerrainBus
-func _on_entity_movement_finished() -> void:
-	#print("terminé de caminar")
+func _on_movement_finished() -> void:
+	print("terminé de caminar")
 	pass
 	
 	
@@ -43,13 +43,11 @@ func _on_entity_movement_finished() -> void:
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad va a comenzar
 ## Con esto se evitan checks duplicados o innecesarios. 
 ## Notifiación creada por EntityTerrainBus
-func _on_entity_movement_started() -> void:
-	print_debug("me muevo")
+func _on_movement_started() -> void:
 	pass
-	#print("voy a caminar")
-	#print_stack()
-	#_get_entity_tile_data()
-	#_tile_handler()
+	print("voy a caminar")
+	_get_entity_tile_data()
+	_tile_handler()
 
 ## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
 ## Además actualiza tanto la posición actual como la posición anterior de entity.
