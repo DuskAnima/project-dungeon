@@ -48,5 +48,6 @@ sources/1 = SubResource("TileSetAtlasSource_xqm8g")
 
 [node name="Terrain" type="TileMapLayer"]
 tile_set = SubResource("TileSet_xqm8g")
-use_kinematic_bodies = true
+occlusion_enabled = false
+collision_enabled = false
 script = ExtResource("3_vjhlg")

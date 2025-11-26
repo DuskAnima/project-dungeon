@@ -11,6 +11,8 @@ var tile_id : int # ID de tile habitado por entity
 var data : TileSet = self.tile_set
 var tile_atlas : TileSetAtlasSource = data.get_source(1)
 var tile_name : String = tile_atlas.resource_name
+
+## Datos de los tipos de hielo
 var borken_ice : TileData = tile_atlas.get_tile_data(Vector2i(0,0), 0)
 var cracked_ice : TileData = tile_atlas.get_tile_data(Vector2i(1,0), 0)
 var ice_floor : TileData = tile_atlas.get_tile_data(Vector2i(2,0), 0)
@@ -25,8 +27,9 @@ func _ready() -> void:
 func _tile_handler() -> void:
 	match tile_id:
 		WALL:
-			print("Muro")
+			print("Qué haces aquí, Fred")
 		ICE:
+			print(tile_data)
 			print("Hielo")
 		FLOOR:
 			print("piso")
@@ -37,7 +40,6 @@ func _tile_handler() -> void:
 func _on_movement_finished() -> void:
 	pass
 	
-	
 
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad va a comenzar
 ## Con esto se evitan checks duplicados o innecesarios. 
@@ -46,8 +48,6 @@ func _on_movement_started() -> void:
 	pass
 	_get_entity_tile_data()
 	_tile_handler()
-
-
 
 
 ## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
