@@ -5,8 +5,8 @@ enum { WALL, ICE, FLOOR }
 
 var current_entity_position : Vector2i # Posición actual de entity
 var last_entity_position : Vector2i # Posicion anterior de entity
-var tile_data : TileData # Tile Custom Data
-var tile_id : int # Tileset ID
+var tile_data : TileData # Custom Data del tile habitado por entity
+var tile_id : int # ID de tile habitado por entity
 
 var data : TileSet = self.tile_set
 var tile_atlas : TileSetAtlasSource = data.get_source(1)
@@ -35,7 +35,6 @@ func _tile_handler() -> void:
 ## Con esto se evitan checks duplicados o innecesarios. 
 ## Notifiación creada por EntityTerrainBus
 func _on_movement_finished() -> void:
-	print("terminé de caminar")
 	pass
 	
 	
@@ -45,15 +44,18 @@ func _on_movement_finished() -> void:
 ## Notifiación creada por EntityTerrainBus
 func _on_movement_started() -> void:
 	pass
-	print("voy a caminar")
 	_get_entity_tile_data()
 	_tile_handler()
 
+
+
+
 ## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
 ## Además actualiza tanto la posición actual como la posición anterior de entity.
-func _get_entity_tile_data() -> void:
-	last_entity_position = current_entity_position # Almacena la posición anterior del personaje
+func _get_entity_tile_data() -> void: # Almacena la posición anterior del personaje
 	# Luego de reposicionarse, se actualiza la información del tile
-	current_entity_position = GridManager.get_entity_position() 
+	last_entity_position = GridManager.last_position
+	current_entity_position = GridManager.next_position
+	#print("estuve en: ", last_entity_position, ". estoy en ", current_entity_position)
 	tile_id = get_cell_source_id(current_entity_position) # Retorna el ID del tile
 	tile_data = get_cell_tile_data(current_entity_position) # Retorna la información del tile

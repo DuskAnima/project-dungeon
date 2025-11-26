@@ -12,6 +12,7 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(16, 16)
+speed = 0.2
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
