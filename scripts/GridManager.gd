@@ -14,10 +14,10 @@ func set_terrain(tilemap: TileMapLayer) -> void:
 	terrain = tilemap
 
 ## Recibe la posición de la entidad (Vector2) y el input de movimiento deseado (Vector2i).
-## Luego, retorna la posición en grid donde deberá situarse la entidad en función al input dado.
+## Luego, retorna la posición en grid donde deberá situarse la entidad en función al input dado (Vector2).
 ## Cae en la responsabilidad de la entidad utilizar estas coordenadas para re ubicar su posición.
 ## Esta función solo crea el cálculo correspondiente.
-func get_new_tile_position(e_position : Vector2, e_direction : Vector2i) -> Vector2: # Se recibe un valor de dirección
+func get_new_tile_position(e_position : Vector2, e_direction : Vector2i) -> Vector2:
 	# Se almacena la posición de la entidad basada en la localización del TileMap
 	last_position = terrain.local_to_map(e_position)
 	# Luego calcula la nueva posición sumando la posición actual de la entidad con la dirección recibida

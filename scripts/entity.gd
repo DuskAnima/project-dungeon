@@ -51,13 +51,17 @@ func _set_new_tile_position_tween(new_position : Vector2) -> void:
 
 
 """
+
 func jump() -> Vector2i:
 	if Input.is_action_just_pressed("ui_accept"):
 		return Vector2i.UP * 2
 	else: 
 		return Vector2i.ZERO
+
+"""
 """
 
+if direction != Vector2i.ZERO and Input.is_action_just_pressed("ui_accept"):
+		_movement_animation(GridManager.grid_movement(position, jump()))
 
-"""	if direction != Vector2i.ZERO and Input.is_action_just_pressed("ui_accept"):
-		_movement_animation(GridManager.grid_movement(position, jump()))"""
+"""
