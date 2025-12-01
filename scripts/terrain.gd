@@ -5,17 +5,18 @@ enum { WALL, ICE, FLOOR }
 
 var current_entity_position : Vector2i # Posición actual de entity
 var last_entity_position : Vector2i # Posicion anterior de entity
-var tile_data : TileData # Custom Data del tile habitado por entity
 var tile_id : int # ID de tile habitado por entity
-var tile_atlas : TileSetAtlasSource # Representación del Atlas que está siendo habitado
+var terrain_tile_data : TileData # Custom Data del tile habitado por entity
+var tile_atlas : TileSetAtlasSource # Referencia al Atlas TileSet que está siendo utilizado
+var tile_atlas_coords : Vector2i # Referencia posicional del tile en uso dentro del Atlas
 
 #var tile_name : String = tile_atlas.resource_name
 
 ## Datos de los tipos de hielo
 """
-var borken_ice : TileData = tile_atlas.get_tile_data(Vector2i(0,0), 0)
+var ice_floor : TileData = tile_atlas.get_tile_data(Vector2i(0,0), 0)
 var cracked_ice : TileData = tile_atlas.get_tile_data(Vector2i(1,0), 0)
-var ice_floor : TileData = tile_atlas.get_tile_data(Vector2i(2,0), 0)
+var broken_ice : TileData = tile_atlas.get_tile_data(Vector2i(2,0), 0)
 """
 func _ready() -> void:
 	GridManager.set_terrain(self) # Entrega terreno para crear el grid
@@ -25,24 +26,29 @@ func _ready() -> void:
 
 # Estoy recibiendo automáticamente la data de cada tile, independiente de cual sea
 func _tile_handler() -> void:
-	var breakable : bool = tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
-	
+	tile_break_system()
 	match tile_id:
 		WALL:
 			print("Qué haces aquí, Fred")
 		ICE:
-			if breakable:
-				print("se te rompe el piso wacho")
-				print(tile_atlas)
-				set_cell(current_entity_position, tile_id, Vector2(0,0))
+			pass
 		FLOOR:
 			pass
-	
+
+func tile_break_system() -> void:
+	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
+	if breakable:
+		print("antes atlas coords: ", tile_atlas_coords)
+		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0)
+		print("despues atlas coords: ", tile_atlas_coords, ". tile breaker", tile_breaker)
+		set_cell(current_entity_position, tile_id, tile_breaker)
+
+
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad ha finalizado
 ## Con esto se evitan checks duplicados o innecesarios. 
 ## Notifiación creada por EntityTerrainBus
 func _on_movement_finished() -> void:
-	pass
+	_tile_handler()
 	
 
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad va a comenzar
@@ -51,7 +57,7 @@ func _on_movement_finished() -> void:
 func _on_movement_started() -> void:
 	pass
 	_get_entity_tile_data()
-	_tile_handler()
+
 
 
 ## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
@@ -62,5 +68,7 @@ func _get_entity_tile_data() -> void: # Almacena la posición anterior del perso
 	current_entity_position = GridManager.next_position
 	#print("estuve en: ", last_entity_position, ". estoy en ", current_entity_position)
 	tile_id = get_cell_source_id(current_entity_position) # Asigna el ID del tile
-	tile_data = get_cell_tile_data(current_entity_position) # Asigna la información del tile
+	terrain_tile_data = get_cell_tile_data(current_entity_position) # Asigna la información del tile
 	tile_atlas = tile_set.get_source(tile_id) # Asigna el Atlas al que corresponde el tile
+	tile_atlas_coords = get_cell_atlas_coords(current_entity_position)
+#	atlas_tile_data = tile_atlas.get_tile_data()
