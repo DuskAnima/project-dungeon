@@ -16,3 +16,4 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-16, -16)
+zoom = Vector2(2, 2)

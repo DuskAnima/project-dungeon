@@ -12,12 +12,6 @@ var tile_atlas_coords : Vector2i # Referencia posicional del tile en uso dentro 
 
 #var tile_name : String = tile_atlas.resource_name
 
-## Datos de los tipos de hielo
-"""
-var ice_floor : TileData = tile_atlas.get_tile_data(Vector2i(0,0), 0)
-var cracked_ice : TileData = tile_atlas.get_tile_data(Vector2i(1,0), 0)
-var broken_ice : TileData = tile_atlas.get_tile_data(Vector2i(2,0), 0)
-"""
 func _ready() -> void:
 	GridManager.set_terrain(self) # Entrega terreno para crear el grid
 	# Conecta el bus a la función de notificación de movimiento 
@@ -35,6 +29,7 @@ func _tile_handler() -> void:
 		FLOOR:
 			pass
 
+
 func tile_break_system() -> void:
 	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
 	if breakable:
@@ -49,26 +44,20 @@ func tile_break_system() -> void:
 ## Notifiación creada por EntityTerrainBus
 func _on_movement_finished() -> void:
 	_tile_handler()
-	
 
 ## Bloque que ejecuta código en base al aviso de que el movimiento de una entidad va a comenzar
 ## Con esto se evitan checks duplicados o innecesarios. 
 ## Notifiación creada por EntityTerrainBus
 func _on_movement_started() -> void:
-	pass
 	_get_entity_tile_data()
 
-
-
-## Obtiene y asigna la información del actual tile utilizado por entity (con un efecto secundario).
+## Obtiene y asigna la información del actual tile utilizado por entity.
 ## Además actualiza tanto la posición actual como la posición anterior de entity.
 func _get_entity_tile_data() -> void: # Almacena la posición anterior del personaje
 	# Luego de reposicionarse, se actualiza la información del tile
 	last_entity_position = GridManager.last_position
 	current_entity_position = GridManager.next_position
-	#print("estuve en: ", last_entity_position, ". estoy en ", current_entity_position)
 	tile_id = get_cell_source_id(current_entity_position) # Asigna el ID del tile
 	terrain_tile_data = get_cell_tile_data(current_entity_position) # Asigna la información del tile
 	tile_atlas = tile_set.get_source(tile_id) # Asigna el Atlas al que corresponde el tile
 	tile_atlas_coords = get_cell_atlas_coords(current_entity_position)
-#	atlas_tile_data = tile_atlas.get_tile_data()
