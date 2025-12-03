@@ -21,14 +21,13 @@ func _ready() -> void:
 # Estoy recibiendo automáticamente la data de cada tile, independiente de cual sea
 func _tile_handler() -> void:
 	tile_break_system()
-	match tile_id:
+	match tile_id: # Sistema de bolsillo para reconocer tiles especificos
 		WALL:
 			print("Qué haces aquí, Fred")
 		ICE:
 			pass
 		FLOOR:
 			pass
-
 
 func tile_break_system() -> void:
 	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
@@ -60,4 +59,4 @@ func _get_entity_tile_data() -> void: # Almacena la posición anterior del perso
 	tile_id = get_cell_source_id(current_entity_position) # Asigna el ID del tile
 	terrain_tile_data = get_cell_tile_data(current_entity_position) # Asigna la información del tile
 	tile_atlas = tile_set.get_source(tile_id) # Asigna el Atlas al que corresponde el tile
-	tile_atlas_coords = get_cell_atlas_coords(current_entity_position)
+	tile_atlas_coords = get_cell_atlas_coords(current_entity_position) # Asigna las tile coords del atlas en uso

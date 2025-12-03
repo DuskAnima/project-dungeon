@@ -1,4 +1,5 @@
-extends CharacterBody2D
+@abstract
+extends Node2D
 class_name Entity
 
 signal etbus
@@ -19,6 +20,7 @@ func _process(_delta: float) -> void:
 ## Función que maneja toda la lógica de movimiento.
 ## El movimiento debe ser instanciado en _process porque de ser manejado _input generaría un
 ## leve delay en los multi inputs (movimiento continuo del personjae en el grid)
+
 func movement_manager() -> void:
 	if can_move != true: # Por defecto el personaje puede caminar
 		return
@@ -36,32 +38,12 @@ func movement_manager() -> void:
 	etbus.emit(movement_finishied) # Avisa a terrain.gd cuando su movimiento haya sido consolidado
 	can_move = true # Ahora se puede, nuevamente, mover al personaje
 
-## Función que retorna un Vector2i que determina la dirección del input de movimiento deseado.
-func _get_direction() -> Vector2i: 
-	if Input.is_action_pressed("down"): return Vector2i.DOWN
-	if Input.is_action_pressed("up"): return Vector2i.UP
-	if Input.is_action_pressed("left"): return Vector2i.LEFT
-	if Input.is_action_pressed("right"): return Vector2i.RIGHT
-	else: return Vector2i.ZERO
+## Función abstracta que retorna un Vector2i que determina la dirección del input de movimiento deseado.
+## Requiere una implementación que especifique el método por el cual la entidad se moverá.
+@abstract
+func _get_direction() -> Vector2i
 
 ## Función que controla el tween del desplazamiento.
 func _set_new_tile_position_tween(new_position : Vector2) -> void:
 	tween = create_tween()
 	tween.tween_property(self, "position", new_position, walk_speed) # It's alive!!
-
-
-"""
-
-func jump() -> Vector2i:
-	if Input.is_action_just_pressed("ui_accept"):
-		return Vector2i.UP * 2
-	else: 
-		return Vector2i.ZERO
-
-"""
-"""
-
-if direction != Vector2i.ZERO and Input.is_action_just_pressed("ui_accept"):
-		_movement_animation(GridManager.grid_movement(position, jump()))
-
-"""
