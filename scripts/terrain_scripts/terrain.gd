@@ -1,4 +1,5 @@
 extends TileMapLayer
+class_name Terrain
 
 enum Data { IS_SOLID, IS_BREAKABLE }
 enum { WALL, ICE, FLOOR }

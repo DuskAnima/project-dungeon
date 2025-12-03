@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://q87b5f6ew8fk"]
+
+[ext_resource type="Script" uid="uid://bk1fdqkq4qsdj" path="res://scripts/terrain_scripts/wall.gd" id="1_164d7"]
+[ext_resource type="TileSet" uid="uid://b1sp61l3ivtso" path="res://scenes/terrain_scenes/base_tile_set.tres" id="1_bexa1"]
+
+[node name="wall" type="TileMapLayer"]
+tile_set = ExtResource("1_bexa1")
+script = ExtResource("1_164d7")
+metadata/_custom_type_script = "uid://b3ujijs2emsun"
