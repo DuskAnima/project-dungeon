@@ -3,10 +3,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_my7n2"]
 size = Vector2(32, 32)
 
-[node name="BaseEntity" type="CharacterBody2D"]
+[node name="Entity" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_my7n2")

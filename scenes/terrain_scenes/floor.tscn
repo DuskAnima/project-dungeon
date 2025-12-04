@@ -1,8 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpj0ujdqfb6tj"]
+[gd_scene load_steps=7 format=3 uid="uid://dpj0ujdqfb6tj"]
 
-[ext_resource type="TileSet" uid="uid://b1sp61l3ivtso" path="res://scenes/terrain_scenes/base_tile_set.tres" id="1_c70ar"]
 [ext_resource type="Script" uid="uid://yuwkhv3g5tcy" path="res://scripts/terrain_scripts/floor.gd" id="1_rytya"]
+[ext_resource type="Texture2D" uid="uid://cvvtr4newch5b" path="res://sprites/ice_crack.png" id="2_weoeh"]
+[ext_resource type="Texture2D" uid="uid://dxgc4mh2lxy46" path="res://sprites/floor.png" id="3_u8mnl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xqm8g"]
+resource_name = "icefloor"
+texture = ExtResource("2_weoeh")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 3
+0:0/0 = 0
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+1:0/0/custom_data_1 = true
+2:0/next_alternative_id = 3
+2:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tw12r"]
+resource_name = "floor1"
+texture = ExtResource("3_u8mnl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xqm8g"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "is_solid"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "is_breakable"
+custom_data_layer_1/type = 1
+sources/2 = SubResource("TileSetAtlasSource_tw12r")
+sources/1 = SubResource("TileSetAtlasSource_xqm8g")
 
 [node name="Floor" type="TileMapLayer"]
-tile_set = ExtResource("1_c70ar")
+tile_set = SubResource("TileSet_xqm8g")
+occlusion_enabled = false
+collision_enabled = false
 script = ExtResource("1_rytya")

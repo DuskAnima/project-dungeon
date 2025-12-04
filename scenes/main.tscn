@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://155xx7s6y6ta"]
+[gd_scene load_steps=4 format=4 uid="uid://155xx7s6y6ta"]
 
+[ext_resource type="PackedScene" uid="uid://dpj0ujdqfb6tj" path="res://scenes/terrain_scenes/floor.tscn" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://q87b5f6ew8fk" path="res://scenes/terrain_scenes/wall.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dh1vbg7aoefin" path="res://scenes/entity_scenes/player.tscn" id="2_sugp2"]
 
 [node name="Main" type="Node2D"]
 metadata/_edit_lock_ = true
+
+[node name="Floor" parent="." instance=ExtResource("1_sugp2")]
+tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAD//wAAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAP//AgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wAAAgAAAAAAAAD9////AgAAAAAAAAD9//7/AgAAAAAAAAD+//7/AgAAAAAAAAD///7/AgAAAAAAAAAAAP7/AgAAAAAAAAABAP7/AgAAAAAAAAACAP7/AgAAAAAAAAADAP7/AgAAAAAAAAADAP//AgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAACAAEAAgAAAAAAAAACAAAAAgAAAAAAAAACAP//AgAAAAAAAAD9/wIAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAACAAQAAQAAAAAAAAABAAQAAQAAAAAAAAAAAAQAAQAAAAAAAAD//wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD9/wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD//wMAAQAAAAAAAAAAAAMAAQAAAAAAAAABAAMAAQAAAAAAAAACAAMAAQAAAAAAAAA=")
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(16, 16)
@@ -12,3 +17,6 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-16, -16)
 zoom = Vector2(2, 2)
+
+[node name="wall" parent="." instance=ExtResource("2_jyhfs")]
+tile_map_data = PackedByteArray("AAD+////AAABAAAAAAD+/wAAAAABAAAAAAD+/wEAAAABAAAAAAACAP//AAAAAAAAAAACAAAAAQAAAAIAAAACAAEAAAAAAAAAAAD+/wIAAQABAAAAAAACAAIAAQABAAIAAAD+/wMAAAABAAEAAAACAAMAAAABAAEAAAD//wMAAAABAAEAAAAAAAMAAAABAAEAAAABAAMAAAABAAEAAAD+//7/AAAAAAEAAAD///7/AAAAAAEAAAAAAP7/AAAAAAEAAAABAP7/AAAAAAEAAAACAP7/AAAAAAEAAAA=")

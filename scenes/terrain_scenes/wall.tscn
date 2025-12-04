@@ -1,9 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://q87b5f6ew8fk"]
+[gd_scene load_steps=7 format=3 uid="uid://q87b5f6ew8fk"]
 
 [ext_resource type="Script" uid="uid://bk1fdqkq4qsdj" path="res://scripts/terrain_scripts/wall.gd" id="1_164d7"]
-[ext_resource type="TileSet" uid="uid://b1sp61l3ivtso" path="res://scenes/terrain_scenes/base_tile_set.tres" id="1_bexa1"]
+[ext_resource type="Texture2D" uid="uid://dccecifrx1q26" path="res://sprites/wall.png" id="1_fb201"]
+[ext_resource type="Texture2D" uid="uid://ctl85g0ohs4si" path="res://sprites/breakable_wall.png" id="2_8lrjw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rq05c"]
+texture = ExtResource("1_fb201")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1egow"]
+texture = ExtResource("2_8lrjw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:0/0/custom_data_1 = true
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+0:1/0/custom_data_1 = true
+1:1/0 = 0
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+0:2/0/custom_data_1 = true
+1:2/0 = 0
+0:3/0 = 0
+0:3/0/custom_data_0 = true
+0:3/0/custom_data_1 = true
+1:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_164d7"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "is_solid"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "is_breakable"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_rq05c")
+sources/1 = SubResource("TileSetAtlasSource_1egow")
 
 [node name="wall" type="TileMapLayer"]
-tile_set = ExtResource("1_bexa1")
+tile_set = SubResource("TileSet_164d7")
 script = ExtResource("1_164d7")
 metadata/_custom_type_script = "uid://b3ujijs2emsun"
