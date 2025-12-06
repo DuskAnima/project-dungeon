@@ -1,7 +1,7 @@
 extends Entity
 
-func _to_string() -> String:
-	return "player"
+#func _ready() -> void:
+
 
 func _get_direction() -> Vector2i:
 	if Input.is_action_pressed("down"): return Vector2i.DOWN

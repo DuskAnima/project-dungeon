@@ -42,12 +42,14 @@ func _can_move_to(new_position : Vector2i) -> bool: # Recibe la posición del ti
 	if _wall_check(new_position) == false: return false
 	else: return true
 
+## Check que revisa si es posible el movimiento en Floor layer 
 func _surface_check(new_position : Vector2i) -> bool:
 	var surface_data : TileData = surface.get_cell_tile_data(new_position) # Obtiene la información del tile
 	if surface_data == null: return false
 	if surface_data.get_custom_data("is_solid") == true: return false
 	else: return true
 
+## Check que revisa si es posible el movimiento en Wall layer 
 func _wall_check(new_position : Vector2i) -> bool:
 	var wall_data : TileData = wall.get_cell_tile_data(new_position)
 	if wall_data == null: return true

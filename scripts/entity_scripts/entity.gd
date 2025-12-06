@@ -13,6 +13,7 @@ var can_move : bool = true
 func _ready() -> void:
 	# Conecta al bus que comunica a la entity.gd con terrain.gd
 	etbus.connect(EntityTerrainBus.connect_signal_to_bus)
+	z_index = 1
 
 func _process(_delta: float) -> void:
 	movement_manager() 
@@ -20,7 +21,6 @@ func _process(_delta: float) -> void:
 ## Función que maneja toda la lógica de movimiento.
 ## El movimiento debe ser instanciado en _process porque de ser manejado _input generaría un
 ## leve delay en los multi inputs (movimiento continuo del personjae en el grid)
-
 func movement_manager() -> void:
 	if can_move != true: # Por defecto el personaje puede caminar
 		return
