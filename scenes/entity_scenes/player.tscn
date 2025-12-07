@@ -11,7 +11,7 @@ animations = [{
 "texture": ExtResource("3_qhqgy")
 }],
 "loop": true,
-"name": &"Idle",
+"name": &"default",
 "speed": 5.0
 }]
 
@@ -19,7 +19,5 @@ animations = [{
 script = ExtResource("2_g2els")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-position = Vector2(0, -7)
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_t81a4")
-animation = &"Idle"
-autoplay = "Idle"

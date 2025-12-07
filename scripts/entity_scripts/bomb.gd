@@ -1,11 +1,13 @@
-extends AnimatedSprite2D
+extends Entity
 
+@onready var bomb_animation : AnimatedSprite2D = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	bomb_animation.play("idle")
+	
+func bomb() -> void:
+	bomb_animation.play("detonation")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _get_direction() -> Vector2i:
+	return Vector2i.ZERO

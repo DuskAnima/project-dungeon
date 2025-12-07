@@ -13,14 +13,11 @@ var tile_atlas_coords : Vector2i # Referencia posicional del tile en uso dentro 
 # Estoy recibiendo automáticamente la data de cada tile, independiente de cual sea
 func _tile_handler() -> void:
 	tile_break_system()
-	print(z_index)
 
 func tile_break_system() -> void:
 	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
 	if breakable:
-		print("antes atlas coords: ", tile_atlas_coords)
 		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0)
-		print("despues atlas coords: ", tile_atlas_coords, ". tile breaker", tile_breaker)
 		set_cell(current_entity_position, tile_id, tile_breaker)
 
 ## Obtiene y asigna la información del actual tile utilizado por entity.
