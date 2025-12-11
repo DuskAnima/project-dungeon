@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c07gygw1qfqvp"]
 
-[ext_resource type="PackedScene" uid="uid://dh1vbg7aoefin" path="res://scenes/entity_scenes/character.tscn" id="1_3pi36"]
-[ext_resource type="Script" uid="uid://qjdcrs2bwjpv" path="res://scripts/entity_scripts/player.gd" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://dh1vbg7aoefin" path="res://scenes/entity_scenes/characters_scenes/character.tscn" id="1_3pi36"]
+[ext_resource type="Script" uid="uid://qjdcrs2bwjpv" path="res://scripts/entity_scripts/character_scripts/player.gd" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://c1gntrq260a6o" path="res://sprites/entity.png" id="3_qhqgy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t81a4"]
@@ -21,3 +21,4 @@ script = ExtResource("2_g2els")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_t81a4")
+autoplay = "default"

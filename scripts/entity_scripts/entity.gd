@@ -9,6 +9,7 @@ var movement_finishied : StringName = "movement_finished"
 var tween : Tween
 var can_move : bool = true
 @export var walk_speed : float = 0.2
+@onready var item_layer : Node2D = get_parent().get_node("ItemLayer")
 
 func _ready() -> void:
 	# Conecta al bus que comunica a la entity.gd con terrain.gd

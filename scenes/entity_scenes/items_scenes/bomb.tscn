@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bix028rolwgaw"]
 
-[ext_resource type="PackedScene" uid="uid://b6i8a0hv7lgwn" path="res://scenes/entity_scenes/item.tscn" id="1_nhc3k"]
+[ext_resource type="PackedScene" uid="uid://b6i8a0hv7lgwn" path="res://scenes/entity_scenes/items_scenes/item.tscn" id="1_nhc3k"]
 [ext_resource type="Texture2D" uid="uid://dsksk01rrvgu7" path="res://sprites/bomb.png" id="2_0l381"]
 [ext_resource type="Script" uid="uid://b736cd70p3q6k" path="res://scripts/entity_scripts/bomb.gd" id="2_2s2yk"]
 
@@ -149,4 +149,5 @@ script = ExtResource("2_2s2yk")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_s6fm7")
-animation = &"idle"
+animation = &"detonation"
+autoplay = "idle"
