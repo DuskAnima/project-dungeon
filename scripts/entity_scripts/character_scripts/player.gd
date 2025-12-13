@@ -11,7 +11,6 @@ func _get_direction() -> Vector2i:
 	else: return Vector2i.ZERO
 
 func _input(_event: InputEvent) -> void:
-	print(_event)
 	if can_move == false:
 		return
 	if Input.is_action_just_pressed("item"):
