@@ -130,7 +130,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s65ii")
 }],
-"loop": true,
+"loop": false,
 "name": &"detonation",
 "speed": 10.0
 }, {
@@ -138,16 +138,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hdnvx")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[node name="Bomb" instance=ExtResource("1_nhc3k")]
+[node name="Bomb" node_paths=PackedStringArray("sprite") instance=ExtResource("1_nhc3k")]
 script = ExtResource("2_2s2yk")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_s6fm7")
-animation = &"detonation"
-autoplay = "idle"
+animation = &"idle"

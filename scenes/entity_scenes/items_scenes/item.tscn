@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dqojtyf4in0y3" path="res://scenes/entity_scenes/entity.tscn" id="1_h0jwj"]
 
-[node name="Object" instance=ExtResource("1_h0jwj")]
+[node name="Item" instance=ExtResource("1_h0jwj")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]

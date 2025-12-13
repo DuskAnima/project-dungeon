@@ -1,9 +1,16 @@
-extends Entity
+extends Item
 
-@onready var bomb_animation : AnimatedSprite2D = $AnimatedSprite2D
+@export var can_break : bool = true
+@export var can_explode : bool = true
 
-func bomb() -> void:
-	bomb_animation.play("detonation")
+func _ready() -> void:
+	EntityTerrainBus.connect_bus_to_signal(_on_movement_started)
 
-func _get_direction() -> Vector2i:
-	return Vector2i.ZERO
+
+func detonation() -> void:
+	sprite.play("detonation") # Conectar a señal de finalización de movimiento
+	if sprite.animation_finished:
+		print("olaaa")
+		
+func _on_movement_started() -> void:
+	detonation()

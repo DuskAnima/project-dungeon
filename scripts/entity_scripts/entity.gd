@@ -2,14 +2,23 @@
 extends Node2D
 class_name Entity
 
+## Esta señal referencia al bus EntityTerrainBus.gd, sirve para conectar señales de Entity a Terrain.
 signal etbus
+## Variable que almacena el nombre de la señal que da aviso al inicio del movimiento de una entidad.
 var movement_started : StringName = "movement_started"
+## Variable que almacena el nombre de la señal que da aviso al final del movimiento de una entidad.
 var movement_finishied : StringName = "movement_finished"
-
+## Variable que almacena el tween de los movimientos de todas las entidades.
 var tween : Tween
+## Variable que controla si una entidad puede o no moverse. Se settea en False en medio del tween de movimiento.
+## Se settea en True cuando el tween no está activo.
 var can_move : bool = true
+## Propiedad que almacena el nodo AnimatedSprite2D de la respectiva entidad. Se debe referenciar al nodo desde el inspector.
+@export var sprite : AnimatedSprite2D
+## Propiedad que almacena la velocidad de movimiento global (tween) de todas las entidades.
 @export var walk_speed : float = 0.2
-@onready var item_layer : Node2D = get_parent().get_node("ItemLayer")
+## Referencia global al Nodo2D "ItemLayer". Se utiliza para instanciar entidades de tipo Item.
+@onready var item_layer : Node2D = get_node("/root/Main/ItemLayer")
 
 func _ready() -> void:
 	# Conecta al bus que comunica a la entity.gd con terrain.gd
@@ -38,6 +47,7 @@ func movement_manager() -> void:
 	await tween.finished # Cuando el tween haya terminado enviará una señal para continuar.
 	etbus.emit(movement_finishied) # Avisa a terrain.gd cuando su movimiento haya sido consolidado
 	can_move = true # Ahora se puede, nuevamente, mover al personaje
+
 
 ## Función abstracta que retorna un Vector2i que determina la dirección del input de movimiento deseado.
 ## Requiere una implementación que especifique el método por el cual la entidad se moverá.

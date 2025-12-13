@@ -1,7 +1,7 @@
 extends TileMapLayer
 class_name Terrain
 
-enum Data { IS_SOLID, IS_BREAKABLE }
+enum Data { IS_SOLID, CAN_BREAK, CAN_EXPLODE }
 
 var current_entity_position : Vector2i # Posición actual de entity
 var last_entity_position : Vector2i # Posicion anterior de entity
@@ -10,15 +10,16 @@ var terrain_tile_data : TileData # Custom Data del tile habitado por entity
 var tile_atlas : TileSetAtlasSource # Referencia al Atlas TileSet que está siendo utilizado
 var tile_atlas_coords : Vector2i # Referencia posicional del tile en uso dentro del Atlas
 
-# Estoy recibiendo automáticamente la data de cada tile, independiente de cual sea
+# Función que recibe automáticamente la data de cada tile, independiente de cual sea
 func _tile_handler() -> void:
-	tile_break_system()
+	tile_break_system() # Cada vez que recibe la data del tile, hace los respectivos checks para verificar cambios.
 
 func tile_break_system() -> void:
-	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.IS_BREAKABLE)
-	if breakable:
-		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0)
-		set_cell(current_entity_position, tile_id, tile_breaker)
+	# Verificación Booleana de si un tile se puede romper
+	var breakable : bool = terrain_tile_data.get_custom_data_by_layer_id(Data.CAN_BREAK) 
+	if breakable: # Si es True
+		var tile_breaker : Vector2i = tile_atlas_coords + Vector2i(1,0) # Se suma uno al siguiente estado del tile
+		set_cell(current_entity_position, tile_id, tile_breaker) # Se establece el nuevo estado factual del tile en el mapa
 
 ## Obtiene y asigna la información del actual tile utilizado por entity.
 ## Además actualiza tanto la posición actual como la posición anterior de entity.
