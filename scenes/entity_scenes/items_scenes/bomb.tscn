@@ -115,19 +115,19 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5gl7b")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_35hk5")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_klefh")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_cerro")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_bxpxe")
 }, {
-"duration": 1.0,
+"duration": 0.6,
 "texture": SubResource("AtlasTexture_s65ii")
 }],
 "loop": false,
@@ -140,7 +140,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"idle",
-"speed": 5.0
+"speed": 0.0
 }]
 
 [node name="Bomb" node_paths=PackedStringArray("sprite") instance=ExtResource("1_nhc3k")]
@@ -151,3 +151,6 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_s6fm7")
 animation = &"idle"
+autoplay = "idle"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_detonation_animation_finished"]

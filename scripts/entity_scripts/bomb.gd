@@ -6,11 +6,11 @@ extends Item
 func _ready() -> void:
 	EntityTerrainBus.connect_bus_to_signal(_on_movement_started)
 
-
 func detonation() -> void:
-	sprite.play("detonation") # Conectar a señal de finalización de movimiento
-	if sprite.animation_finished:
-		print("olaaa")
-		
+	sprite.play("detonation")
+
 func _on_movement_started() -> void:
 	detonation()
+
+func _on_detonation_animation_finished() -> void:
+	queue_free()

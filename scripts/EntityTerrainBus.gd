@@ -3,18 +3,16 @@ extends Node
 
 ## Conecta la señal de EntityTerrainBus a un callable declarado, creando comunicación entre terrain.gd y entity.gd
 ## Esta función solo se utiliza para recibir señales sin datos
-## 0. El Callable que será el receptor de la señal solo puede ser declarado una vez, sin importar en cual de los
-## dos scripts (terrain.gd o entity.gd) sea declarado.
+## 0. El Callable que será el receptor de la señal será el que de nombre a la señal, los posteriores solo se suscribirán
+## a la señal previamente creada. Es por eso que se recomienda almacenar las señales nombradas en variables StringName.
 ## 1. En en _on_ready(), se debe declarar EntityTerrainBus.connect_bus_to_signal(<trigger>). 
 ## 2. El trigger a declarar es el Callable que recibirá la señal.
 ## 3. La convención de nombres es on_<trigger>() en el receptor y etbus.emit(<trigger>) en el emisor. 
-## y es OBLIGATORIA para que las señales funcionen.
+## y es OBLIGATORIA para que las señales funcionen. Para suscribirse a la señal es el mismo proceso.
 func connect_bus_to_signal(callable : Callable) -> void:
 	var signal_name : StringName = callable.get_method()
 	if has_signal(signal_name):
-		printerr("Aviso: La señal ", "<", signal_name, ">" ," ya existe y está conectada a ", 
-		"<", Array(get_signal_connection_list(signal_name))[0].callable, ">", #debug
-		" no puede ser conectada a ", "<", callable, ">. Para evitar comportamientos impredecibles por duplicados, por favor, utilice otro nombre para su señal.") # Debugg
+		connect(signal_name, callable) # Si la señal ya existe previamente, suscribe la señal al nuevo callable
 		return
 	add_user_signal(signal_name) # Aun no hay nada conectado a la señal, hay que conectarla
 	#print("conectaré ", "<", signal_name, ">" ," a ", "<", callable, ">") # Debug

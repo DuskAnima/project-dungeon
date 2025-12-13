@@ -12,5 +12,5 @@ func _input(_event: InputEvent) -> void:
 
 func set_bomb() -> void:
 	var instance : Node2D = Bomb.instantiate()
-	instance.position = position
+	instance.position = position + Vector2(16, 0)
 	item_layer.add_child(instance)
