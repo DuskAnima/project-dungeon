@@ -18,6 +18,9 @@ func set_surface(tilemap: Terrain) -> void:
 func set_wall(tilemap: Terrain) -> void:
 	wall = tilemap
 
+func spawn_check(spawn_position : Vector2) -> void:
+	print(spawn_position)
+
 ## Recibe la posición de la entidad (Vector2) y el input de movimiento deseado (Vector2i).
 ## Luego, retorna la posición en grid donde deberá situarse la entidad en función al input dado (Vector2).
 ## Cae en la responsabilidad de la entidad utilizar estas coordenadas para re ubicar su posición.

@@ -21,17 +21,23 @@ var can_move : bool = true
 @onready var item_layer : Node2D = get_node("/root/Main/ItemLayer")
 
 func _ready() -> void:
+	GridManager.spawn_check(position)
 	# Conecta al bus que comunica a la entity.gd con terrain.gd
 	etbus.connect(EntityTerrainBus.connect_signal_to_bus)
-	z_index = 1
+	_on_ready_hook()
+
+## Función que se ejecuta posterior a los settings de _ready(). Se utiliza para extender el comportamiento de _ready()
+## desde las subclases derivativas de entity.
+@abstract
+func _on_ready_hook() -> void
 
 func _process(_delta: float) -> void:
-	movement_manager() 
+	_movement_manager()  # Instancia _movement_manager() debajo de
 
 ## Función que maneja toda la lógica de movimiento.
 ## El movimiento debe ser instanciado en _process porque de ser manejado _input generaría un
 ## leve delay en los multi inputs (movimiento continuo del personjae en el grid)
-func movement_manager() -> void:
+func _movement_manager() -> void:
 	if can_move != true: # Por defecto el personaje puede caminar
 		return
 	var direction : Vector2i = _get_direction() # Se obtiene la dirección deseada

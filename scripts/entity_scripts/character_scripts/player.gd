@@ -1,7 +1,7 @@
 extends Character
 
-#func _ready() -> void:
-
+func _on_ready_hook() -> void:
+	z_index = 1 # Establece el z-index en 1 para quedar por sobre el piso y las paredes, pero por debajo de los umbrales de puertaa
 
 func _get_direction() -> Vector2i:
 	if Input.is_action_pressed("down"): return Vector2i.DOWN
