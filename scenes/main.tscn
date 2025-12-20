@@ -14,7 +14,7 @@ tile_map_data = PackedByteArray("AAD/////AgAAAAAAAAD//wAAAgAAAAAAAAD//wEAAgAAAAA
 position = Vector2(16, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(3, 3)
 
 [node name="ItemLayer" type="Node2D" parent="."]
 

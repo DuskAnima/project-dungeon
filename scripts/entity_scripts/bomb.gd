@@ -1,6 +1,6 @@
 extends Item
 
-enum {DETONATION, EXPLOTION}
+enum {DETONATION, EXPLOSION}
 
 ## Experimental: propiedad de objeto que determina si puede romper objetos
 @export var can_break : bool = true
@@ -10,16 +10,16 @@ enum {DETONATION, EXPLOTION}
 var status : int 
 
 func _on_ready_implement() -> void:
-	EntityTerrainBus.connect_bus_to_signal(_on_movement_started) # Conecta con la señal/propiedad de entity "movement_started"
-
+	pass
+	
 func detonation() -> void:
 	status = DETONATION
 	sprite.play("detonation")
-	status = EXPLOTION
+	status = EXPLOSION
 
-func explotion() -> void:
+func explosion() -> void:
 	z_index = 3 # Establece su z-index en 3, por sobre las demás entidades, para que la explosión cubra visualmente a todo 
-	sprite.play("explotion")
+	sprite.play("explosion")
 	await sprite.animation_finished
 	queue_free()
 
@@ -28,7 +28,7 @@ func _on_movement_started() -> void:
 	
 func _bomb_controller() -> void:
 	match status:
-		EXPLOTION:
-			explotion()
+		EXPLOSION:
+			explosion()
 		DETONATION:
 			detonation()

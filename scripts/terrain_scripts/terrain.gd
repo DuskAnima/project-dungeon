@@ -1,7 +1,8 @@
 extends TileMapLayer
 class_name Terrain
 
-enum Data { IS_SOLID, CAN_BREAK, CAN_EXPLODE }
+## IS_SOLID = terreno no transitable | CAN_BREAK = terreno rompible | CAN_EXPLODE = terreno explotable
+enum Data { IS_SOLID, CAN_BREAK, CAN_EXPLODE } 
 
 var current_entity_position : Vector2i # Posición actual de entity
 var last_entity_position : Vector2i # Posicion anterior de entity

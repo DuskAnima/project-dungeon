@@ -116,37 +116,37 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_s6fm7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_2s2yk")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_tggpf")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_j2h8d")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_pdu4o")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_56ura")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_n4f3j")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_f7arf")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_1k6pi")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_626jb")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_ggttx")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_jn1sc")
 }],
 "loop": false,
@@ -200,7 +200,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_85xi0")
 }],
 "loop": false,
-"name": &"explotion",
+"name": &"explosion",
 "speed": 20.0
 }, {
 "frames": [{
@@ -219,5 +219,5 @@ sprite = NodePath("AnimatedSprite2D")
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_s6fm7")
-animation = &"explotion"
+animation = &"detonation"
 autoplay = "idle"

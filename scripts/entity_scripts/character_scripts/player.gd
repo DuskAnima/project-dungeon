@@ -15,3 +15,6 @@ func _input(_event: InputEvent) -> void:
 		return
 	if Input.is_action_just_pressed("item"):
 		set_bomb()
+
+func _on_movement_started() -> void:
+	pass
