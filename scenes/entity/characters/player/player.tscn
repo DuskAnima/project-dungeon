@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://c07gygw1qfqvp"]
+
+[ext_resource type="PackedScene" uid="uid://dh1vbg7aoefin" path="res://scenes/entity/characters/character.tscn" id="1_3pi36"]
+[ext_resource type="Script" uid="uid://qjdcrs2bwjpv" path="res://scenes/entity/characters/player/player.gd" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://bogmfi8cpxhbw" path="res://scenes/entity/characters/player/player_sprites/front.png" id="3_acw5t"]
+[ext_resource type="Texture2D" uid="uid://c1r1hdlpwq7re" path="res://scenes/entity/characters/player/player_sprites/left.png" id="4_xqw5h"]
+[ext_resource type="Texture2D" uid="uid://cxy1exb6tas02" path="res://scenes/entity/characters/player/player_sprites/right.png" id="5_ji331"]
+[ext_resource type="Texture2D" uid="uid://tyx06xase2kr" path="res://scenes/entity/characters/player/player_sprites/back.png" id="6_4dhgu"]
+[ext_resource type="Script" uid="uid://teldgpbqho6l" path="res://utils/state_machine/state_machine.gd" id="7_ji331"]
+[ext_resource type="Script" uid="uid://cpl73uo1eekup" path="res://scenes/entity/characters/player/player_states/player_state_rotate.gd" id="8_xqqfe"]
+[ext_resource type="Script" uid="uid://dig4thc58vlpa" path="res://scenes/entity/characters/player/player_states/player_state_idle.gd" id="9_ggyef"]
+[ext_resource type="Script" uid="uid://dsvjxvtu12460" path="res://scenes/entity/characters/player/player_states/player_state_walk.gd" id="10_766qq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t81a4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_acw5t")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_acw5t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xqw5h")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ji331")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4dhgu")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="Player" node_paths=PackedStringArray("sprite") instance=ExtResource("1_3pi36")]
+script = ExtResource("2_g2els")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_t81a4")
+animation = &"down"
+autoplay = "idle"
+
+[node name="StateMachine" type="Node" parent="." index="2" node_paths=PackedStringArray("default_state")]
+script = ExtResource("7_ji331")
+default_state = NodePath("PlayerStateIdle")
+
+[node name="PlayerStateRotate" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("8_xqqfe")
+
+[node name="PlayerStateIdle" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("9_ggyef")
+
+[node name="PlayerStateWalk" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("10_766qq")

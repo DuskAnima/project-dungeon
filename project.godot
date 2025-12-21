@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GridManager="*res://scripts/GridManager.gd"
-EntityTerrainBus="*res://scripts/EntityTerrainBus.gd"
+EntityTerrainBus="*res://utils/autoloads/EntityTerrainBus.gd"
+GridManager="*res://utils/autoloads/GridManager.gd"
 
 [debug]
 
